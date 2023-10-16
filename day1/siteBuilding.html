@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website building</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="databinding">
+        <h3>Radio</h3>
+        <input type="radio" id="black" value="Black" v-model="picked" />Black
+        <input type="radio" id="white" value="White" v-model="picked" />White
+        <h3>Radio element clicked : {{picked}}</h3>
+        <hr />
+        <h3>Select</h3>
+        <select v-model="languages">
+          <option disabled value="">Please select one</option>
+          <option>Java</option>
+          <option>Javascript</option>
+          <option>Php</option>
+          <option>C</option>
+          <option>C++</option>
+        </select>
+        <h3>Languages Selected is : {{ languages }}</h3>
+        <hr />
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        picked: "",
+        languages: "",
+      },
+    });
+  </script>
+</html>

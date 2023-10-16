@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Square by computed</title>
+    <style>
+      .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-top: 10px;
+      }
+      .doubleColomn {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+      .space {
+        padding: 30px;
+      }
+      .img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      img {
+        height: 250px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div class="center" id="app">
+      <div class="img">
+        <img :src="imgsrc" />
+        <a :href="hreflink">LINK</a>
+      </div>
+      <div class="doubleColomn">
+        <div class="space">
+          <p>computed</p>
+          <input placeholder="type number" v-model="inputValue" />
+          <p v-if="inputValue.length=0 ? '' : squareResult">
+            Square: {{ squareResult }}
+          </p>
+        </div>
+        <div class="space">
+          <p>methods</p>
+          <input
+            placeholder="type number"
+            type="number"
+            v-model="inputValue2"
+          />
+          <p v-if="inputValue2.length=0 ? '' : result">Square: {{ result }}</p>
+          <button @click="getSquare()">Calculate</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        inputValue: "",
+        inputValue2: "",
+        result: "",
+        imgsrc: "cat.jpg",
+        hreflink:
+          "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdev.ua%2Fnews%2Fmonobank-vykhodyt-na-rynok-polshchi-1674025310&psig=AOvVaw2YEZ1I4pVhgM-4QJiqwFgI&ust=1697576203411000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCICplKO6-4EDFQAAAAAdAAAAABAE",
+      },
+      methods: {
+        getSquare() {
+          this.result = this.inputValue2 * this.inputValue2;
+        },
+      },
+      computed: {
+        squareResult: function () {
+          return this.inputValue * this.inputValue;
+        },
+      },
+    });
+  </script>
+</html>
