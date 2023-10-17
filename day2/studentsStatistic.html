@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Statistic of students</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ccc;
+        width: 150px;
+      }
+      input[type="checkbox"] {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+      .red {
+        color: red;
+      }
+      a {
+        cursor: pointer;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Searching</h1>
+      <input placeholder="type name" v-model="searchName" />
+      <table>
+        <tr v-for="(stud, index) in filteredStudents" :key="index">
+          <td :class="{ 'red': stud.highlighted }">{{ stud.name }}</td>
+          <td>
+            <input type="checkbox" v-model="stud.workDone" />
+          </td>
+          <td>{{ stud.group }}</td>
+          <td><a @click="deleteStudent(stud.id)">Delete</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    var arrayStudents = [
+      {
+        id: 0,
+        name: "Adam Sandler",
+        group: "RPZ 20-1",
+        workDone: true,
+      },
+      {
+        id: 1,
+        name: "Carrie Bradshaw",
+        group: "RPZ 20-2",
+        workDone: false,
+      },
+      {
+        id: 2,
+        name: "Tom Holland",
+        group: "RPZ 20-1",
+        workDone: false,
+      },
+      {
+        id: 3,
+        name: "Jim Carrey",
+        group: "RPZ 20-2",
+        workDone: true,
+      },
+      {
+        id: 4,
+        name: "Jimy Carreyy",
+        group: "RPZ 20-2",
+        workDone: true,
+      },
+    ];
+    new Vue({
+      el: "#app",
+      data: {
+        students: arrayStudents,
+        searchName: "",
+        deleteLink: "",
+      },
+      computed: {
+        filteredStudents: function () {
+          const searchNameLower = this.searchName.toLowerCase();
+          return this.students.map((stud) => ({
+            ...stud,
+            highlighted:
+              stud.name.toLowerCase().includes(searchNameLower) &&
+              searchNameLower.length > 0,
+          }));
+        },
+      },
+      //   computed: {
+      //     searchResult: function () {
+      //       const searchName = this.searchName.toLowerCase();
+      //       return this.students.filter((stud) =>
+      //         stud.name.toLowerCase().includes(searchName)
+      //       );
+      //     },
+      //   },
+      methods: {
+        deleteStudent(id) {
+          const index = this.students.findIndex((stud) => stud.id === id);
+          if (index !== -1) {
+            this.students.splice(index, 1);
+          }
+        },
+      },
+    });
+  </script>
+</html>
