@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Switch theme</title>
+    <style>
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .light {
+        background-color: rgb(151, 224, 224);
+      }
+      .dark {
+        background-color: rgb(99, 46, 46);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h2>Select theme</h2>
+      <div>
+        <input
+          type="radio"
+          value="light"
+          name="drone"
+          v-model="selectedTheme"
+        />
+        <label>light</label>
+      </div>
+      <div>
+        <input type="radio" value="dark" name="drone" v-model="selectedTheme" />
+        <label>dark</label>
+      </div>
+      <div class="text">Hello, World!</div>
+    </div>
+  </body>
+  <script>
+    var lightRadio = document.querySelector('input[value="light"]');
+    var darkRadio = document.querySelector('input[value="dark"]');
+    var selectedTheme = localStorage.getItem("mood");
+
+    if (selectedTheme === "light") {
+      lightRadio.checked = true;
+    } else if (selectedTheme === "dark") {
+      darkRadio.checked = true;
+    }
+
+    lightRadio.addEventListener("change", function () {
+      document.querySelector(".text").classList.remove("dark");
+      document.querySelector(".text").classList.add("light");
+      localStorage.setItem("mood", "light");
+    });
+
+    darkRadio.addEventListener("change", function () {
+      document.querySelector(".text").classList.remove("light");
+      document.querySelector(".text").classList.add("dark");
+      localStorage.setItem("mood", "dark");
+    });
+  </script>
+</html>
