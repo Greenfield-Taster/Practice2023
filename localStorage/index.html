@@ -38,9 +38,9 @@
     </div>
   </body>
   <script>
-    var lightRadio = document.querySelector('input[value="light"]');
-    var darkRadio = document.querySelector('input[value="dark"]');
-    var selectedTheme = localStorage.getItem("mood");
+    const lightRadio = document.querySelector('input[value="light"]');
+    const darkRadio = document.querySelector('input[value="dark"]');
+    const selectedTheme = localStorage.getItem("mood");
 
     if (selectedTheme === "light") {
       lightRadio.checked = true;
